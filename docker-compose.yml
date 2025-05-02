@@ -1,0 +1,26 @@
+services:
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppassword
+      WORDPRESS_DB_NAME: wpdb
+    volumes:
+      - ./wp_data:/var/www/html
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+volumes:
+  wp_data:
+  db_data:
