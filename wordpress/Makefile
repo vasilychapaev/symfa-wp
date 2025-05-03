@@ -23,11 +23,11 @@ stop:
 start:
 	docker compose start
 
-bash:
+bashw:
 	docker compose exec wordpress /bin/bash
 
-bashc:
-	docker compose exec $(c) /bin/bash
+bash:
+	docker compose exec $(name) /bin/bash
 
 reset:
 	docker compose down -v --remove-orphans
