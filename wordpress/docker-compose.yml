@@ -46,3 +46,19 @@ services:
         docker-php-ext-install pdo pdo_mysql &&
         php artisan serve --host=0.0.0.0 --port=8001
       "
+  symfony-guide:
+    image : php:8.2-cli
+    working_dir: /var/www/symfony
+    volumes:
+      - ../symfony-guide:/var/www/symfony
+    ports:
+      - "8002:8002"
+    depends_on:
+      - db
+    command: >
+      bash -c "
+        docker-php-ext-install pdo pdo_mysql &&
+        curl -sS https://get.symfony.com/cli/installer | bash &&
+        mv ~/.symfony*/bin/symfony /usr/local/bin/symfony &&
+        symfony server:start --listen-ip=0.0.0.0 --port=8002 --no-tls
+      "
